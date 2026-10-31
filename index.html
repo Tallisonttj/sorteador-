@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteador de Números (1 a 10)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .number-display {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #38bdf8;
+            margin: 1.5rem 0;
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        .history {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Sorteio (1 a 10)</h1>
+        <div class="number-display" id="numeroSorteado">-</div>
+        <button onclick="sortearNumero()">Sortear Número</button>
+        <div class="history" id="textoHistorico">Nenhum número salvo ainda.</div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'ultimo_numero_sorteado';
+
+        // Carregar o último número salvo ao iniciar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            const ultimo = localStorage.getItem(STORAGE_KEY);
+            if (ultimo !== null) {
+                document.getElementById('numeroSorteado').textContent = ultimo;
+                document.getElementById('textoHistorico').textContent = `Último número salvo: ${ultimo}`;
+            }
+        });
+
+        function sortearNumero() {
+            // Sorteia de 1 a 10
+            const numero = Math.floor(Math.random() * 10) + 1;
+
+            // Atualiza a interface
+            document.getElementById('numeroSorteado').textContent = numero;
+            document.getElementById('textoHistorico').textContent = `Último número salvo: ${numero}`;
+
+            // Salva no LocalStorage
+            localStorage.setItem(STORAGE_KEY, numero);
+        }
+    </script>
+
+</body>
+</html>
